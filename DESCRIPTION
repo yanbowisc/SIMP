@@ -1,6 +1,6 @@
 Package: SIMP
 Type: Package
-Title: Bayesian Simultaneous Envelope Model
+Title: Bayesian Simultaneous Partial Envelope Model
 Version: 0.1.0
 Author: Yanbo Shen, Yeonhee Park, Saptarshi Chakraborty, Chunming Zhang
 Maintainer: Yanbo Shen <yshen84@wisc.edu>
