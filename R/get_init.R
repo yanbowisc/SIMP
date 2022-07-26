@@ -111,39 +111,6 @@ get_init <- function(X1C, X1D_ctr, X2_ctr, Y, dx, dy, method.idx = 1){
     }
   }
 
-
-  if ((pd > 0)&(p2 > 0)){
-    Ystar <- lm(Yc ~ X1D_ctr + X2_ctr)$residuals
-  }else if ((pd == 0)&(p2 > 0)){
-    Ystar <- lm(Yc ~ X2_ctr)$residuals
-  }else if ((pd > 0)&(p2 == 0)){
-    Ystar <- lm(Yc ~ X1D_ctr)$residuals
-  }else if ((pd == 0)&(p2 == 0)){
-    Ystar <- Yc
-  }
-
-  if ((pd > 0)&(p2 > 0)){
-    YstarR <- lm(Yc%*%R ~ X1D_ctr + X2_ctr)$residuals
-  }else if ((pd == 0)&(p2 > 0)){
-    YstarR <- lm(Yc%*%R ~ X2_ctr)$residuals
-  }else if ((pd > 0)&(p2 == 0)){
-    YstarR <- lm(Yc%*%R ~ X1D_ctr)$residuals
-  }else if ((pd == 0)&(p2 == 0)){
-    YstarR <- Yc%*%R
-  }
-
-  if ((pd > 0)&(p2 > 0)){
-    Yevlp.fit1 <- penv(X1D_ctr, X2_ctr, Yc, dy, asy = FALSE, init = NULL)
-    Ystar1 <- Yc - tcrossprod(X1D_ctr, Yevlp.fit1$beta1) - tcrossprod(X2_ctr, Yevlp.fit1$beta2)
-  }else if ((pd == 0)&(p2 > 0)){
-    Ystar1 <- lm(Yc ~ X2_ctr)$residuals
-  }else if ((pd > 0)&(p2 == 0)){
-    Yevlp.fit1 <- env(X1D_ctr, Yc, dy, asy = FALSE, init = NULL)
-    Ystar1 <- Yc - tcrossprod(X1D_ctr, Yevlp.fit1$beta)
-  }else if ((pd == 0)&(p2 == 0)){
-    Ystar1 <- Yc
-  }
-
   if ((pd > 0)&(p2 > 0)){
     Xstar <- lm(X1Cc ~ X1D_ctr + X2_ctr)$residuals
   }else if ((pd == 0)&(p2 > 0)){
@@ -155,17 +122,87 @@ get_init <- function(X1C, X1D_ctr, X2_ctr, Y, dx, dy, method.idx = 1){
   }
 
   if (method.idx == 1){
+    
+    if ((pd > 0)&(p2 > 0)){
+      Ystar <- lm(Yc ~ X1D_ctr + X2_ctr)$residuals
+    }else if ((pd == 0)&(p2 > 0)){
+      Ystar <- lm(Yc ~ X2_ctr)$residuals
+    }else if ((pd > 0)&(p2 == 0)){
+      Ystar <- lm(Yc ~ X1D_ctr)$residuals
+    }else if ((pd == 0)&(p2 == 0)){
+      Ystar <- Yc
+    }
     Xenvlp.fit <- xenv(X = Xstar, Y = Ystar, dx, asy = FALSE, init = NULL)
+    
   }else if(method.idx == 2){
+    
+    if ((pd > 0)&(p2 > 0)){
+      YstarR <- lm(Yc%*%R ~ X1D_ctr + X2_ctr)$residuals
+    }else if ((pd == 0)&(p2 > 0)){
+      YstarR <- lm(Yc%*%R ~ X2_ctr)$residuals
+    }else if ((pd > 0)&(p2 == 0)){
+      YstarR <- lm(Yc%*%R ~ X1D_ctr)$residuals
+    }else if ((pd == 0)&(p2 == 0)){
+      YstarR <- Yc%*%R
+    }
     Xenvlp.fit <- xenv(X = Xstar, Y = YstarR, dx, asy = FALSE, init = NULL)
+    
   }else if(method.idx == 3){
+    
+    if ((pd > 0)&(p2 > 0)){
+      Yevlp.fit1 <- penv(X1D_ctr, X2_ctr, Yc, dy, asy = FALSE, init = NULL)
+      Ystar1 <- Yc - tcrossprod(X1D_ctr, Yevlp.fit1$beta1) - tcrossprod(X2_ctr, Yevlp.fit1$beta2)
+    }else if ((pd == 0)&(p2 > 0)){
+      Ystar1 <- lm(Yc ~ X2_ctr)$residuals
+    }else if ((pd > 0)&(p2 == 0)){
+      Yevlp.fit1 <- env(X1D_ctr, Yc, dy, asy = FALSE, init = NULL)
+      Ystar1 <- Yc - tcrossprod(X1D_ctr, Yevlp.fit1$beta)
+    }else if ((pd == 0)&(p2 == 0)){
+      Ystar1 <- Yc
+    }
     Xenvlp.fit <- xenv(X = Xstar, Y = Ystar1, dx, asy = FALSE, init = NULL)
+    
   }else if(method.idx == 4){
+    
+    if ((pd > 0)&(p2 > 0)){
+      Ystar <- lm(Yc ~ X1D_ctr + X2_ctr)$residuals
+    }else if ((pd == 0)&(p2 > 0)){
+      Ystar <- lm(Yc ~ X2_ctr)$residuals
+    }else if ((pd > 0)&(p2 == 0)){
+      Ystar <- lm(Yc ~ X1D_ctr)$residuals
+    }else if ((pd == 0)&(p2 == 0)){
+      Ystar <- Yc
+    }
     Xenvlp.fit <- stenv(X = Xstar, Y = Ystar, dx, dy, asy = FALSE)
+    
   }else if(method.idx == 5){
+    
+    if ((pd > 0)&(p2 > 0)){
+      YstarR <- lm(Yc%*%R ~ X1D_ctr + X2_ctr)$residuals
+    }else if ((pd == 0)&(p2 > 0)){
+      YstarR <- lm(Yc%*%R ~ X2_ctr)$residuals
+    }else if ((pd > 0)&(p2 == 0)){
+      YstarR <- lm(Yc%*%R ~ X1D_ctr)$residuals
+    }else if ((pd == 0)&(p2 == 0)){
+      YstarR <- Yc%*%R
+    }
     Xenvlp.fit <- stenv(X = Xstar, Y = YstarR, dx, dy, asy = FALSE)
+    
   }else if(method.idx == 6){
+    
+    if ((pd > 0)&(p2 > 0)){
+      Yevlp.fit1 <- penv(X1D_ctr, X2_ctr, Yc, dy, asy = FALSE, init = NULL)
+      Ystar1 <- Yc - tcrossprod(X1D_ctr, Yevlp.fit1$beta1) - tcrossprod(X2_ctr, Yevlp.fit1$beta2)
+    }else if ((pd == 0)&(p2 > 0)){
+      Ystar1 <- lm(Yc ~ X2_ctr)$residuals
+    }else if ((pd > 0)&(p2 == 0)){
+      Yevlp.fit1 <- env(X1D_ctr, Yc, dy, asy = FALSE, init = NULL)
+      Ystar1 <- Yc - tcrossprod(X1D_ctr, Yevlp.fit1$beta)
+    }else if ((pd == 0)&(p2 == 0)){
+      Ystar1 <- Yc
+    }
     Xenvlp.fit <- stenv(X = Xstar, Y = Ystar1, dx, dy, asy = FALSE)
+    
   }
 
 
