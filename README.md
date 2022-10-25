@@ -14,28 +14,28 @@ Here, we produce one replicate of the simulation results of SIMP with r = 3 and 
 
 ```R
 library(SIMP)
-# Load the library of SIMP
+# Load the library of SIMP.
 
 rep <- 1
 # This is the first replication. 
 
 n <- 300
-# The sample size is 300
+# The sample size is 300.
 
 r <- 3
-# The dimension of Y is 3
+# The dimension of Y is 3.
 
 pc <- 8
-# The dimension of X1C is 8
+# The dimension of X1C is 8.
 
 pd <- 2
-# The dimension of X1D is 2
+# The dimension of X1D is 2.
 
 p2 <- 2
-# The dimension of X2 is 2
+# The dimension of X2 is 2.
 
 K <- 2
-# Number of levels for generating uniform X1D
+# Number of levels for generating uniform X1D.
 
 mu2 <- c(2, 5)
 # means for X2
@@ -72,7 +72,7 @@ if (p2 > 0){
 # Generate the covariance parameter for generating X2.
 
 all_pars <- generate_par(r, pc, pd, p2, dx = dx.tru, dy = dy.tru)
-# Generate other parameters
+# Generate other parameters.
 ```
 We generate all parameters that are needed for data generation in the above codes.
 
@@ -139,7 +139,7 @@ We generate all data matrices X1C (n * pc), X1D  (n * pd), X2  (n * p2) and Y  (
 
 ```R
 bic <- numeric((pc + 1) * (r + 1))
-# initialized an empty vector to save BIC-MCMC values for all envelope dimensions
+# initialized an empty vector to save BIC-MCMC values for all envelope dimensions.
 
 dx_min <- dy_min <- Bura_Cook(X1C_ctr, X1D_ctr, X2_ctr, Y_ctr, sig.level = 0.05)
 # Select the minimum envelope dimensions dx_min for dx, and dy_min for dy by the Bura-Cook estimator that is introduced in Section 6.1 in the paper.
@@ -218,6 +218,6 @@ mu1C.est <- elmwise_mean_in_list(SIMP.fit$muX1C[[1]])
 beta1C.est <- elmwise_mean_in_list(SIMP.fit$beta1C[[1]])
 beta1D.est <- elmwise_mean_in_list(SIMP.fit$beta1D[[1]])
 beta2.est <- elmwise_mean_in_list(SIMP.fit$beta2[[1]])
-# Extract the posterior mean estimators of muY, mu1C, beta1C, beta1D and beta2 from SIMP
+# Extract the posterior mean estimators of muY, mu1C, beta1C, beta1D and beta2 from SIMP.
 ```
 We implement the model fitting of SIMP with selected envelope dimensions, and calculate the posterior mean estimators of muY, mu1C, beta1C, beta1D and beta2 in the above codes. In our simulation in Section 7.2.2, we repeated the data generation, model selection and model fitting for 500 times, and reported the MSEs of the estimated beta1C and beta1D over 500 replications in Table 3.
