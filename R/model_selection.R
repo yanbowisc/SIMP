@@ -12,7 +12,8 @@
 #' should be combined to calculate BIC. If there is only one chain, then there is no difference 
 #' by indicating this parameter to be TRUE or FALSE.
 #' @param Chain.no If combined = FALSE, we need to indicate which chain should be used for the 
-#' calculation of BIC. Chain.no must be an integer between 1 and the number of chains.
+
+#' calculation of BIC-MCMC. Chain.no must be an integer between 1 and the number of chains.
 #'
 #' @export
 BIC <- function(SIMP.fit, r, pc, pd, p2, dx, dy, samp.size, combined = T, Chain.no = 1){
@@ -28,7 +29,7 @@ BIC <- function(SIMP.fit, r, pc, pd, p2, dx, dy, samp.size, combined = T, Chain.
   bic
 }
 
-#' AIC calculation for the output of \code{SIMP()}
+#' AIC-MCMC calculation for the output of \code{SIMP()}
 #' 
 #' @param SIMP.fit The output of \code{SIMP()}.
 #' @param r Dimension of response Y.
