@@ -7,3 +7,6 @@ This is a Github repository for `SIMP`, the Bayesian simultaneous partial envelo
 install.packages("devtools")
 devtools::install_github("yanbowisc/SIMP")
 ```
+
+## Readme description for producing results (tables, figures) in the paper "Bayesian simultaneous partial envelope model with application to an imaging
+## genetics analysis"
